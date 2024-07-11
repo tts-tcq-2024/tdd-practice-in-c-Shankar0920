@@ -25,3 +25,8 @@ int add(const char* input) {
     }
     return calculateSum(input);
 }
+int main()
+{
+    int result;
+    return 0;
+}
