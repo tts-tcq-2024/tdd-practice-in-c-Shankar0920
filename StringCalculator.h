@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
 int isStringEmpty(const char* input) {
     if (strcmp(input, "") == 0 || strcmp(input, "0") == 0) {
         return 1;
@@ -9,7 +8,6 @@ int isStringEmpty(const char* input) {
         return 0;
     }
 }
-
 int isValidNumber(const char* token) {
     char* endptr;
     long num = strtol(token, &endptr, 10);
@@ -21,7 +19,6 @@ int isValidNumber(const char* token) {
     }
     return (num <= 1000);
 }
-
 int calculateSum(const char* input) {
     int sum = 0;
     char* token;
@@ -37,7 +34,6 @@ int calculateSum(const char* input) {
     free(inputCopy); // free the memory allocated for the copy of the input string
     return sum;
 }
-
 int add(const char* input) {
     if (isStringEmpty(input)) {
         return 0;
