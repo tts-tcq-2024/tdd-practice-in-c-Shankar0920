@@ -1,28 +1,46 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-int isDelimiter(char c) {
-    return (c == ',' || c == '\n' || c == ';');
+#include <stdlib.h>
+
+int isStringEmpty(const char* input) {
+    if (strcmp(input, "") == 0 || strcmp(input, "0") == 0) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
+
 int isValidNumber(const char* token) {
-    int num = atoi(token);
+    char* endptr;
+    long num = strtol(token, &endptr, 10);
+    if (*endptr != '\0') {
+        return 0;
+    }
+    if (num < 0) {
+        return -1;
+    }
     return (num <= 1000);
 }
+
 int calculateSum(const char* input) {
     int sum = 0;
-    char* token = strtok((char*)input, ",\n;");
+    char* token;
+    char* delimiter = ", \n//;";
+    char* inputCopy = strdup(input); // create a copy of the input string
+    token = strtok(inputCopy, delimiter);
     while (token != NULL) {
         if (isValidNumber(token)) {
             sum += atoi(token);
         }
-        token = strtok(NULL, ",\n;");
+        token = strtok(NULL, delimiter);
     }
+    free(inputCopy); // free the memory allocated for the copy of the input string
     return sum;
 }
+
 int add(const char* input) {
-    if (input == NULL || strlen(input) == 0) {
+    if (isStringEmpty(input)) {
         return 0;
     }
     return calculateSum(input);
 }
-
